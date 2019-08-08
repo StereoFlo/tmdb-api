@@ -37,8 +37,9 @@ abstract class AbstractSection
 
     /**
      * AbstractSection constructor.
+     * @param Query $query
      */
-    public function __construct()
+    public function __construct(Query $query)
     {
         if (empty(static::SECTION_NAME) || empty(static::METHOD) || empty(static::END_URL)) {
             throw new RuntimeException('sectionName or method is empty');
@@ -47,22 +48,13 @@ abstract class AbstractSection
         $this->sectionName = static::SECTION_NAME;
         $this->method = static::METHOD;
         $this->endUrl = static::END_URL;
-    }
-
-    /**
-     * @param Query $query
-     * @return static
-     */
-    public function setQuery(Query $query): AbstractSection
-    {
         $this->query = $query;
-        return $this;
     }
 
     /**
      * @return Query
      */
-    public function getQuery()
+    public function getQuery(): Query
     {
         return $this->query;
     }

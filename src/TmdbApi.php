@@ -32,26 +32,22 @@ class TmdbApi
      * @var AbstractSection
      */
     private $section;
-
     /**
-     * @var Query
+     * @var Common
      */
-    private $query;
+    private $common;
 
     /**
      * TmdbApi constructor.
-     * @param string $apiUrl
-     * @param string $apiKey
+     * @param Common $common
      * @param AbstractSection $section
-     * @param Query $query
      */
-    public function __construct(string $apiUrl, string $apiKey, AbstractSection $section, Query $query)
+    public function __construct(Common $common, AbstractSection $section)
     {
-        $this->apiKey = $apiKey;
+        $this->common = $common;
+        $this->apiKey = $common->getApiKey();
         $this->section = $section;
-        $this->apiUrl = $apiUrl;
-        $this->query = $query;
-        $this->section->setQuery($query);
+        $this->apiUrl = $common->getApiUrl();
     }
 
     /**
@@ -67,8 +63,8 @@ class TmdbApi
         $query = [
             'api_key' => $this->apiKey,
         ];
-        if ($this->query->getIsAddToMainQuery()) {
-            $query = $query + $this->query->toArray();
+        if ($this->section->getQuery()->getIsAddToMainQuery()) {
+            $query = $query + $this->section->getQuery()->toArray();
         }
         try {
             $response = HttpClient::create()->request($this->section->getMethod(), $this->apiUrl . '/' . $this->section->getPath(), [
