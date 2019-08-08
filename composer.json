@@ -1,0 +1,20 @@
+{
+    "name": "stereoflo/tmdb-api",
+    "description": "",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "StereoFlo",
+            "email": "stereoflo@users.github.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "TmdbApi\\": "src/"
+        }
+    },
+    "require": {
+        "symfony/http-client": "^4.3"
+    }
+}
