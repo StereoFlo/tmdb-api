@@ -3,6 +3,7 @@
 namespace TmdbApi\Section;
 
 use RuntimeException;
+use TmdbApi\Query;
 
 /**
  * Class AbstractSection
@@ -12,7 +13,7 @@ abstract class AbstractSection
 {
     const SECTION_NAME = '';
     const METHOD = '';
-    const URL = '';
+    const END_URL = '';
 
     /**
      * @var string
@@ -27,52 +28,39 @@ abstract class AbstractSection
     /**
      * @var string
      */
-    protected $url;
+    protected $endUrl;
 
     /**
-     * @var string|int
+     * @var Query
      */
     protected $query;
-
-    /**
-     * @var bool
-     */
-    protected $queryToPath = false;
 
     /**
      * AbstractSection constructor.
      */
     public function __construct()
     {
-        if (empty(static::SECTION_NAME) || empty(static::METHOD) || empty(static::URL)) {
+        if (empty(static::SECTION_NAME) || empty(static::METHOD) || empty(static::END_URL)) {
             throw new RuntimeException('sectionName or method is empty');
         }
 
         $this->sectionName = static::SECTION_NAME;
         $this->method = static::METHOD;
-        $this->url = static::URL;
+        $this->endUrl = static::END_URL;
     }
 
     /**
-     * @param int|string $query
+     * @param Query $query
      * @return static
      */
-    public function setQuery($query): AbstractSection
+    public function setQuery(Query $query): AbstractSection
     {
         $this->query = $query;
         return $this;
     }
 
     /**
-     * @return bool
-     */
-    public function isQueryToPath(): bool
-    {
-        return $this->queryToPath;
-    }
-
-    /**
-     * @return int|string
+     * @return Query
      */
     public function getQuery()
     {
@@ -98,9 +86,9 @@ abstract class AbstractSection
     /**
      * @return string
      */
-    public function getUrl(): string
+    public function getEndUrl(): string
     {
-        return $this->url;
+        return $this->endUrl;
     }
 
     /**
@@ -108,9 +96,9 @@ abstract class AbstractSection
      */
     public function getPath(): string
     {
-        if (empty($this->query)) {
+        if (empty($this->query->getQuery())) {
             throw new RuntimeException('query cannot be empty');
         }
-        return $this->sectionName . '/' . sprintf($this->url, $this->query);
+        return $this->sectionName . '/' . sprintf($this->endUrl, $this->query->getQuery());
     }
 }

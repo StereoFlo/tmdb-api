@@ -12,5 +12,5 @@ class Changes extends AbstractSection
 {
     const SECTION_NAME = 'movie';
     const METHOD = 'GET';
-    const URL = '%d/changes';
+    const END_URL = '%d/changes';
 }

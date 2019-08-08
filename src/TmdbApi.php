@@ -34,23 +34,24 @@ class TmdbApi
     private $section;
 
     /**
-     * @var array
+     * @var Query
      */
-    private $optionalData;
+    private $query;
 
     /**
      * TmdbApi constructor.
      * @param string $apiUrl
      * @param string $apiKey
      * @param AbstractSection $section
-     * @param array|null $optionalData
+     * @param Query $query
      */
-    public function __construct(string $apiUrl, string $apiKey, AbstractSection $section, array $optionalData = null)
+    public function __construct(string $apiUrl, string $apiKey, AbstractSection $section, Query $query)
     {
         $this->apiKey = $apiKey;
         $this->section = $section;
         $this->apiUrl = $apiUrl;
-        $this->optionalData = $optionalData;
+        $this->query = $query;
+        $this->section->setQuery($query);
     }
 
     /**
@@ -65,9 +66,9 @@ class TmdbApi
     {
         $query = [
             'api_key' => $this->apiKey,
-        ] + $this->optionalData;
-        if ($this->section->isQueryToPath()) {
-            $query = $query + ['query' => $this->section->getQuery()];
+        ];
+        if ($this->query->getIsAddToMainQuery()) {
+            $query = $query + $this->query->toArray();
         }
         try {
             $response = HttpClient::create()->request($this->section->getMethod(), $this->apiUrl . '/' . $this->section->getPath(), [

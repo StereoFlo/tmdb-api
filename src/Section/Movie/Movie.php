@@ -12,5 +12,5 @@ class Movie extends AbstractSection
 {
     const SECTION_NAME = 'movie';
     const METHOD = 'GET';
-    const URL = '%d';
+    const END_URL = '%d';
 }

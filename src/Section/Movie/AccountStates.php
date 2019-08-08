@@ -12,5 +12,5 @@ class AccountStates extends AbstractSection
 {
     const SECTION_NAME = 'movie';
     const METHOD = 'GET';
-    const URL = '%d/account_states';
+    const END_URL = '%d/account_states';
 }

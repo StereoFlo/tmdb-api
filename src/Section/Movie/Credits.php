@@ -12,5 +12,5 @@ class Credits extends AbstractSection
 {
     const SECTION_NAME = 'movie';
     const METHOD = 'GET';
-    const URL = '%d/credits';
+    const END_URL = '%d/credits';
 }

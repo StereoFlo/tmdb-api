@@ -12,5 +12,5 @@ class AlternativeTitles extends AbstractSection
 {
     const SECTION_NAME = 'movie';
     const METHOD = 'GET';
-    const URL = '%d/alternative_titles';
+    const END_URL = '%d/alternative_titles';
 }
