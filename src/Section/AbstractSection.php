@@ -88,7 +88,7 @@ abstract class AbstractSection
      */
     public function getPath(): string
     {
-        if (empty($this->query->getQuery())) {
+        if (strpos($this->endUrl, '%') === false) {
             return $this->sectionName . '/' . $this->endUrl;
         }
         return $this->sectionName . '/' . sprintf($this->endUrl, $this->query->getQuery());
