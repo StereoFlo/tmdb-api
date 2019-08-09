@@ -60,19 +60,27 @@ class TmdbApi
      */
     public function get(): array
     {
+        try {
+            $response = HttpClient::create()->request($this->section->getMethod(), $this->apiUrl . '/' . $this->section->getPath(), [
+                'query' => $this->getQueryArray(),
+            ]);
+            return $response->toArray();
+        } catch (Exception $exception) {
+            throw new RuntimeException($exception->getMessage());
+        }
+    }
+
+    /**
+     * @return array
+     */
+    private function getQueryArray(): array
+    {
         $query = [
             'api_key' => $this->apiKey,
         ];
         if ($this->section->getQuery()->getIsAddToMainQuery()) {
             $query = $query + $this->section->getQuery()->toArray();
         }
-        try {
-            $response = HttpClient::create()->request($this->section->getMethod(), $this->apiUrl . '/' . $this->section->getPath(), [
-                'query' => $query,
-            ]);
-            return $response->toArray();
-        } catch (Exception $exception) {
-            throw new RuntimeException($exception->getMessage());
-        }
+        return $query;
     }
 }
