@@ -8,7 +8,7 @@ use TmdbApi\Section\AbstractSection;
  * Class Person
  * @package TmdbApi\Section\People
  */
-class Person extends AbstractSection
+class Images extends AbstractSection
 {
     const SECTION_NAME = 'person';
     const METHOD = 'GET';
