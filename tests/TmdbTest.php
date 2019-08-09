@@ -28,7 +28,7 @@ class TmdbTest extends TestCase
      */
     public function testGteMovieById()
     {
-        $common = new Common('https://api.themoviedb.org/3', '0c98d8bc68d597418394646776babd5e');
+        $common = new Common('https://api.themoviedb.org/3', 'key');
         $query = new Query(2502, true, ['language' => 'ru']);
         $movie = new Movie($query);
         $tmdb = new TmdbApi($common, $movie);
