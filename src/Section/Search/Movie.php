@@ -1,21 +1,12 @@
 <?php
 
-namespace TmdbApi\Section\Search;
+declare(strict_types = 1);
 
-use TmdbApi\Section\AbstractSection;
+namespace TMDB\Section\Search;
 
-/**
- * Class Movie
- * @package TmdbApi\Section\Movie
- */
+use TMDB\Section\AbstractSection;
+
 class Movie extends AbstractSection
 {
-    const SECTION_NAME = 'search';
-    const METHOD = 'GET';
-    const END_URL = 'movie';
-
-    /**
-     * @var bool
-     */
-    protected $queryToPath = true;
+    protected $path = '/search/movie';
 }

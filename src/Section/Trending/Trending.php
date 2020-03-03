@@ -1,16 +1,12 @@
 <?php
 
-namespace TmdbApi\Section\Trending;
+declare(strict_types = 1);
 
-use TmdbApi\Section\AbstractSection;
+namespace TMDB\Section\Trending;
 
-/**
- * Class Trending
- * @package TmdbApi\Section\Trending
- */
+use TMDB\Section\AbstractSection;
+
 class Trending extends AbstractSection
 {
-    const SECTION_NAME = 'trending';
-    const METHOD = 'GET';
-    const END_URL = 'all/week';
+    protected $path = '/trending/%s/%s';
 }

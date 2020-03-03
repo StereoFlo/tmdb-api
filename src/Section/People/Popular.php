@@ -6,7 +6,7 @@ namespace TMDB\Section\People;
 
 use TMDB\Section\AbstractSection;
 
-class Person extends AbstractSection
+class Popular extends AbstractSection
 {
-    protected $path = '/person/%s';
+    protected $path = '/person/popular';
 }

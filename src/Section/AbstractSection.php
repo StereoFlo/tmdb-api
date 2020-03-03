@@ -1,96 +1,74 @@
 <?php
 
-namespace TmdbApi\Section;
+declare(strict_types = 1);
 
-use RuntimeException;
-use TmdbApi\Query;
+namespace TMDB\Section;
 
 /**
- * Class AbstractSection
- * @package TmdbApi\Section
+ * Class AbstractSection.
  */
 abstract class AbstractSection
 {
-    const SECTION_NAME = '';
-    const METHOD = '';
-    const END_URL = '';
+    /**
+     * @var string
+     */
+    protected $method = 'GET';
 
     /**
      * @var string
      */
-    protected $sectionName;
+    protected $path = '';
 
     /**
-     * @var string
+     * @var string[]
      */
-    protected $method;
+    protected $pathParams = [];
 
     /**
-     * @var string
+     * @var array<string, mixed>
      */
-    protected $endUrl;
+    protected $query = [];
 
     /**
-     * @var Query
+     * @param string[]             $pathParams
+     * @param array<string, mixed> $query
      */
-    protected $query;
-
-    /**
-     * AbstractSection constructor.
-     * @param Query $query
-     */
-    public function __construct(Query $query)
+    public function __construct(string $path = null, array $pathParams = [], array $query = [])
     {
-        if (empty(static::SECTION_NAME) || empty(static::METHOD) || empty(static::END_URL)) {
-            throw new RuntimeException('sectionName or method is empty');
+        if ($path) {
+            $this->path = $path;
         }
+        if ($pathParams) {
+            $this->pathParams = $pathParams;
+        }
+        if ($query) {
+            $this->query = $query;
+        }
+    }
 
-        $this->sectionName = static::SECTION_NAME;
-        $this->method = static::METHOD;
-        $this->endUrl = static::END_URL;
-        $this->query = $query;
+    public function getPath(): string
+    {
+        return $this->path;
     }
 
     /**
-     * @return Query
+     * @return array<string, mixed>
      */
-    public function getQuery(): Query
+    public function getQuery(): array
     {
         return $this->query;
     }
 
     /**
-     * @return string
+     * @return string[]
      */
-    public function getSectionName(): string
+    public function getPathParams(): array
     {
-        return $this->sectionName;
+        return $this->pathParams;
     }
 
-    /**
-     * @return string
-     */
     public function getMethod(): string
     {
         return $this->method;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEndUrl(): string
-    {
-        return $this->endUrl;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPath(): string
-    {
-        if (strpos($this->endUrl, '%') === false) {
-            return $this->sectionName . '/' . $this->endUrl;
-        }
-        return $this->sectionName . '/' . sprintf($this->endUrl, $this->query->getQuery());
     }
 }

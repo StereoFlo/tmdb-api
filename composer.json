@@ -1,28 +1,19 @@
 {
     "name": "stereoflo/tmdb-api",
-    "description": "",
+    "description": "desc",
     "type": "library",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "StereoFlo",
-            "email": "stereoflo@users.github.com"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "TmdbApi\\": "src/"
-        }
-    },
     "require": {
         "symfony/http-client": "^4.4|^5.0"
     },
-    "autoload-dev": {
+    "autoload": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "TMDB\\": "src/"
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.5"
+        "friendsofphp/php-cs-fixer": "^2.0",
+        "consolidation/robo": "^1.0",
+        "phpstan/phpstan": "^0.12.5"
     }
 }
