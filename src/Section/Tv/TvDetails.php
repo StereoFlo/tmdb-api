@@ -6,5 +6,5 @@ use TMDB\Section\AbstractSection;
 
 class TvDetails extends AbstractSection
 {
-    protected $path = '/tv/$s';
+    protected $path = '/tv/%s';
 }
