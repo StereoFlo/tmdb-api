@@ -33,16 +33,18 @@ abstract class AbstractSection
      * @param string[]             $pathParams
      * @param array<string, mixed> $query
      */
-    public function __construct(string $path = null, array $pathParams = [], array $query = [])
+    public function __construct(array $pathParams = [], array $query = [], string $path = null)
     {
-        if ($path) {
-            $this->path = $path;
-        }
         if ($pathParams) {
             $this->pathParams = $pathParams;
         }
+
         if ($query) {
             $this->query = $query;
+        }
+
+        if ($path) {
+            $this->path = $path;
         }
     }
 
